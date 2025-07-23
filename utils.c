@@ -1,41 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strjoin.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 22:13:16 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/23 23:02:50 by romukena         ###   ########.fr       */
+/*   Created: 2025/07/23 23:20:37 by romukena          #+#    #+#             */
+/*   Updated: 2025/07/23 23:20:46 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+int	ft_strlen(char *str)
 {
-	char	*dest;
-	int		i;
-	int		j;
-	int		len;
-	
+	int i;
+
 	i = 0;
-	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	dest = malloc(len + 1);
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(char *str)
+{
+	int		i;
+	char	*dest;
+
+	i = 0;
+	dest = malloc(sizeof(char) * ft_strlen(str) + 1);
 	if (!dest)
 		return (NULL);
-	while (s1[i])
+	while (str[i])
 	{
-		dest[i] = s1[i];
+		dest[i] = str[i];
 		i++;
-	}
-	while (s2[j])
-	{
-		dest[i] = s2[j];
-		i++;
-		j++;
 	}
 	dest[i] = '\0';
-	return (dest);
+	return dest;
+}
+
+int	ft_strncmp(char *s1, char *s2, int n)
+{
+	int	i;
+	
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] && s2[i])
+	{
+		if (i == n - 1)
+			break;
+		i++;
+	}
+	return (s1[i] - s2[i]);
 }
