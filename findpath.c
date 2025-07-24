@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:52:36 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/23 23:21:51 by romukena         ###   ########.fr       */
+/*   Updated: 2025/07/24 12:19:22 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ char	*find_cmd_path(char **paths, char *cmd)
 		if (!tmp)
 			return (NULL);
 		path_to_test = ft_strjoin(tmp, cmd);
+		free(tmp);
 		if (!path_to_test)
 			return (NULL);
-		if (access(path_to_test, X_OK))
+		if (access(path_to_test, X_OK) == 0)
 			return (path_to_test);
+		free(path_to_test);
 		i++;
 	}
 	return (0);
