@@ -6,13 +6,13 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:43:09 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/24 13:02:52 by romukena         ###   ########.fr       */
+/*   Updated: 2025/07/24 17:10:46 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int open_infile(char *filename)
+int	open_infile(char *filename)
 {
 	int	fd;
 
@@ -30,4 +30,71 @@ int	open_outfile(char *filename)
 	if (fd == -1)
 		return (-1);
 	return (fd);
+}
+
+/*
+Prototype possible
+
+void	child_process_1(int infile_fd, int pipe_write_fd, char *cmd, char **envp);
+
+But de la fonction
+
+    Rediriger l’entrée standard (stdin) vers le fichier d’entrée (infile_fd).
+
+    Rediriger la sortie standard (stdout) vers l’extrémité écriture du pipe (pipe_write_fd).
+
+    Fermer tous les descripteurs inutiles.
+
+    Trouver le chemin absolu de la commande (ex : /bin/ls) à partir de cmd et envp.
+
+    Exécuter la commande avec execve.
+
+    En cas d’erreur, afficher un message et terminer proprement.
+
+*/
+
+void	child_process_1(int infile_fd, int pipe_write_fd, char *cmd, char **envp)
+{
+	char	*pathname;
+	char	**good_path;
+	char	**args;
+
+	dup2(infile_fd, 0);
+	close(infile_fd);
+	dup2(pipe_write_fd, 1);
+	close(pipe_write_fd);
+	good_path = get_paths(envp);
+	args = parse_cmd(cmd);
+	pathname = find_cmd_path(good_path, args[0]);
+	if (!pathname)
+    {
+        perror("Command not found");
+        exit(1);
+    }
+	execve(pathname, args, envp);
+	perror("execve failed");
+    exit(1);
+}
+
+void child_process_2(int pipe_read_fd, int outfile_fd, char *cmd, char **envp)
+{
+	char	*pathname;
+	char	**good_path;
+	char	**args;
+	
+	dup2(pipe_read_fd, 0);
+	close(pipe_read_fd);
+	dup2(outfile_fd, 1);
+	close(outfile_fd);
+	args = parse_cmd(cmd);
+	good_path = get_paths(envp);
+	pathname = find_cmd_path(good_path, args[0]);
+	if (!pathname)
+    {
+        perror("Command not found");
+        exit(1);
+    }
+	execve(pathname, args, envp);
+	perror("execve failed");
+    exit(1);
 }

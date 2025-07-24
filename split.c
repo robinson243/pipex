@@ -6,13 +6,13 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 16:00:07 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/23 21:41:08 by romukena         ###   ########.fr       */
+/*   Updated: 2025/07/24 14:51:31 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int is_charset(char c, char *charset)
+static int	is_charset(char c, char *charset)
 {
     int i;
 
@@ -26,7 +26,7 @@ static int is_charset(char c, char *charset)
     return 0;
 }
 
-static int count_word(char *str, char *charset)
+static int	count_word(char *str, char *charset)
 {
     int i;
     int count;

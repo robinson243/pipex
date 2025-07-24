@@ -6,13 +6,13 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:52:36 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/24 12:19:22 by romukena         ###   ########.fr       */
+/*   Updated: 2025/07/24 14:50:56 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char **get_paths(char **envp)
+char	**get_paths(char **envp)
 {
 	int		i;
 	char	**tab;

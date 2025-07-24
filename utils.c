@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:20:37 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/24 12:34:08 by romukena         ###   ########.fr       */
+/*   Updated: 2025/07/24 15:27:18 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_strncmp(char *s1, char *s2, int n)
 	return (s1[i] - s2[i]);
 }
 
-char **parse_cmd(char *cmd)
+char	**parse_cmd(char *cmd)
 {
 	char	**tab;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exo.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/24 14:49:44 by romukena          #+#    #+#             */
+/*   Updated: 2025/07/24 15:23:36 by romukena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -240,5 +252,57 @@ int	main(void)
 
 	write(1, buffer, 6); // afficher ce qu'on a lu
 
+	return (0);
+}
+
+/**********************EXECVE ***********************
+Elle sert à exécuter un programme (commande, script, binaire) à partir de son
+chemin absolu, avec un tableau d'arguments et un environnement.
+
+⚠️ Elle remplace le processus courant par le nouveau programme.
+************************************************************************************/
+
+/*
+prototype :
+int execve(const char *pathname, char *const argv[], char *const envp[]);
+
+📌 pathname → chemin absolu du fichier exécutable (ex: /bin/ls)
+📌 argv[] → tableau d’arguments (argv[0] est le nom du programme)
+📌 envp[] → tableau de variables d’environnement (ex: ce que tu reçois de `envp` dans `main`)
+
+📌 Si execve réussit → il ne revient jamais : le processus courant est remplacé.
+📌 Si execve échoue → retourne -1 et remplit errno (tu peux faire perror())
+
+📌 Utilisation dans pipex
+
+Tu veux exécuter une commande comme ls -l :
+
+    Tu dois d'abord parser la commande → char *args[] = {"ls", "-l", NULL};
+
+    Tu parcours les chemins du $PATH, et pour chaque dossier :
+
+        tu construis un chemin complet → "/bin/ls"
+
+        tu testes avec access(path_to_ls, X_OK)
+
+        si c'est exécutable, tu fais :
+
+	execve("/bin/ls", args, envp);
+
+    Si ça réussit → ça remplace le process actuel (donc le code après execve ne s'exécute pas)
+
+    Si ça échoue → tu fais un perror("execve") pour afficher l'erreur
+
+*/
+
+#include <unistd.h>
+#include <stdio.h>
+
+int	main(int argc, char **argv, char **envp)
+{
+	char *args[] = { "ls", "-l", NULL };
+
+	if (execve("/bin/ls", args, envp) == -1)
+		perror("❌ execve");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:55:50 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/23 23:21:44 by romukena         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:48:18 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,24 @@
 # include <fcntl.h>
 # include <string.h>
 # include <unistd.h>
+# include <sys/wait.h>
 
 char	**ft_split(char *s, char *charset);
 char	*ft_strjoin(char *s1, char *s2);
-/* Utils.c */
+/* utils.c */
 int		ft_strlen(char *str);
 int		ft_strncmp(char *s1, char *s2, int n);
 char	*ft_strdup(char *str);
+char	**parse_cmd(char *cmd);
+
+/* findpath.c*/
+char	*find_cmd_path(char **paths, char *cmd);
+char	**get_paths(char **envp);
+
+/* files.c*/
+
+void	child_process_1(int infile_fd, int pipe_write_fd, char *cmd, char **envp);
+void	child_process_2(int pipe_read_fd, int outfile_fd, char *cmd, char **envp);
+
 
 #endif
