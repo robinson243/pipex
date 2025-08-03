@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:43:09 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/24 17:10:46 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/03 17:39:01 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,54 @@ void child_process_2(int pipe_read_fd, int outfile_fd, char *cmd, char **envp)
 	execve(pathname, args, envp);
 	perror("execve failed");
     exit(1);
+}
+
+void	pipex(char **av, char **envp)
+{
+	int		infile_fd;
+	int		outfile_fd; 
+	int		pipe_fd[2];
+	pid_t	pid;
+	pid_t	pid2;
+	
+	
+	if (pipe(pipe_fd) == -1)
+	{
+		perror("pipe");
+		exit(EXIT_FAILURE);
+	}
+	infile_fd = open(av[1], O_RDONLY);
+	outfile_fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (infile_fd == -1 || outfile_fd == -1)
+		return ;
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(infile_fd, 0);
+		dup2(pipe_fd[1], 1);
+		close(infile_fd);
+		close(pipe_fd[0]);
+		close(pipe_fd[1]);
+		child_process_1(infile_fd, pipe_fd[1], av[2], envp);
+	}
+	else
+	{
+		pid2 = fork();
+		if (pid2 == 0)
+		{			
+			dup2(pipe_fd[0], 0);
+			dup2(outfile_fd, 1);
+			close(outfile_fd);
+			close(pipe_fd[1]);
+			close(pipe_fd[0]);
+			child_process_2(outfile_fd, pipe_fd[0], av[3], envp);
+		}
+		else
+		{
+			close(pipe_fd[0]);
+			close(pipe_fd[1]);
+			waitpid(pid, NULL, 0);
+			waitpid(pid2, NULL, 0);
+		}
+	}
 }
