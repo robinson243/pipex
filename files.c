@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:43:09 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/04 18:03:26 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/05 01:20:38 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,20 @@ void	exit_with_error(char *msg)
 	exit(EXIT_FAILURE);
 }
 
-void	child_process_1(int infile_fd, int pipe_write_fd,
-		char *cmd, char **envp)
+void	free_all_and_exit(char *pathname, char **good_path, char **args,
+		int exit_code)
+{
+	if (pathname)
+		free(pathname);
+	if (good_path)
+		free_tab(good_path, len_tab(good_path));
+	if (args)
+		free_tab(args, len_tab(args));
+	exit(exit_code);
+}
+
+void	child_process_1(int infile_fd, int pipe_write_fd, char *cmd,
+		char **envp)
 {
 	char	*pathname;
 	char	**good_path;
@@ -35,15 +47,15 @@ void	child_process_1(int infile_fd, int pipe_write_fd,
 	if (!pathname)
 	{
 		perror("Command not found");
-		exit(1);
+		free_all_and_exit(NULL, good_path, args, 1);
 	}
 	execve(pathname, args, envp);
 	perror("execve failed");
-	exit(1);
+	free_all_and_exit(pathname, good_path, args, EXIT_FAILURE);
 }
 
-void	child_process_2(int pipe_read_fd, int outfile_fd,
-		char *cmd, char **envp)
+void	child_process_2(int pipe_read_fd, int outfile_fd, char *cmd,
+		char **envp)
 {
 	char	*pathname;
 	char	**good_path;
@@ -59,9 +71,9 @@ void	child_process_2(int pipe_read_fd, int outfile_fd,
 	if (!pathname)
 	{
 		perror("Command not found");
-		exit(1);
+		free_all_and_exit(NULL, good_path, args, 1);
 	}
 	execve(pathname, args, envp);
 	perror("execve failed");
-	exit(1);
+	free_all_and_exit(pathname, good_path, args, EXIT_FAILURE);
 }
