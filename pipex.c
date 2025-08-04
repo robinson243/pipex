@@ -6,12 +6,11 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 15:42:52 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/04 15:43:03 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/04 15:58:21 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
 
 void	close_files(int fd1, int fd2, int fd3, int fd4)
 {
@@ -25,6 +24,7 @@ void	close_files(int fd1, int fd2, int fd3, int fd4)
 		close(fd4);
 	exit_with_error("Error");
 }
+
 void	close_files_without_eror(int fd1, int fd2, int fd3, int fd4)
 {
 	if (fd1 >= 0)
@@ -73,4 +73,3 @@ void	pipex(char **av, char **envp)
 	waitpid(pid, NULL, 0);
 	waitpid(pid2, NULL, 0);
 }
-

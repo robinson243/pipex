@@ -6,20 +6,20 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:55:50 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/04 15:44:33 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/04 15:55:51 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <sys/types.h>
 # include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
 # include <string.h>
-# include <unistd.h>
+# include <sys/types.h>
 # include <sys/wait.h>
+# include <unistd.h>
 
 char	**ft_split(char *s, char *charset);
 char	*ft_strjoin(char *s1, char *s2);
@@ -35,8 +35,8 @@ char	**get_paths(char **envp);
 
 /* files.c*/
 
-void	child_process_1(int infile_fd, int pipe_write_fd,
-			char *cmd, char **envp);
-void	child_process_2(int pipe_read_fd, int outfile_fd,
-			char *cmd, char **envp);
+void	child_process_1(int infile_fd, int pipe_write_fd, char *cmd,
+			char **envp);
+void	child_process_2(int pipe_read_fd, int outfile_fd, char *cmd,
+			char **envp);
 #endif

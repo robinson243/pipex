@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:20:37 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/24 15:27:18 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/04 15:57:39 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -39,18 +39,18 @@ char	*ft_strdup(char *str)
 		i++;
 	}
 	dest[i] = '\0';
-	return dest;
+	return (dest);
 }
 
 int	ft_strncmp(char *s1, char *s2, int n)
 {
 	int	i;
-	
+
 	i = 0;
 	while (s1[i] == s2[i] && s1[i] && s2[i])
 	{
 		if (i == n - 1)
-			break;
+			break ;
 		i++;
 	}
 	return (s1[i] - s2[i]);

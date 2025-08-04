@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 22:13:16 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/23 23:02:50 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/04 15:56:44 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	int		j;
 	int		len;
-	
+
 	i = 0;
 	j = 0;
 	len = ft_strlen(s1) + ft_strlen(s2);

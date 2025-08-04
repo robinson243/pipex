@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 16:00:07 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/24 14:51:31 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/04 15:56:23 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,40 @@
 
 static int	is_charset(char c, char *charset)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (charset[i])
-    {
-        if (charset[i] == c)
-            return (1);
-        i++;
-    }
-    return 0;
+	i = 0;
+	while (charset[i])
+	{
+		if (charset[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 static int	count_word(char *str, char *charset)
 {
-    int i;
-    int count;
+	int	i;
+	int	count;
 
-    i = 0;
-    count = 0;
-    while (str[i])
-    {
-        while (str[i] && is_charset(str[i], charset))
-            i++;
-        if (str[i])
-            count++;
-        while (str[i] && !is_charset(str[i], charset))
-            i++;
-    }
-    return count;
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		while (str[i] && is_charset(str[i], charset))
+			i++;
+		if (str[i])
+			count++;
+		while (str[i] && !is_charset(str[i], charset))
+			i++;
+	}
+	return (count);
 }
 
 static char	*ft_strndup(char *s, int start, int end)
 {
-	int	i;
+	int		i;
 	char	*dest;
 
 	i = 0;
@@ -74,11 +74,12 @@ static void	free_tab(char **tab)
 		i++;
 	}
 }
+
 char	**ft_split(char *s, char *charset)
 {
-	int	i;
-	int	j;
-	int	k;
+	int		i;
+	int		j;
+	int		k;
 	char	**tab;
 
 	i = 0;
@@ -93,7 +94,7 @@ char	**ft_split(char *s, char *charset)
 		j = i;
 		while (s[i] && !is_charset(s[i], charset))
 			i++;
-		tab[k] = ft_strndup(s, j , i);
+		tab[k] = ft_strndup(s, j, i);
 		if (!tab[k])
 			free_tab(tab);
 		k++;
@@ -104,34 +105,34 @@ char	**ft_split(char *s, char *charset)
 
 /* int main()
 {
-    char str[] = "Hello, world! Welcome to C programming.";
-    char charset[] = " ";
+	char str[] = "Hello, world! Welcome to C programming.";
+	char charset[] = " ";
 
-    char **result = ft_split(str, charset);
-    int i = 0;
+	char **result = ft_split(str, charset);
+	int i = 0;
 
-    // Vérification si l'allocation a réussi.
-    if (!result)
-    {
-        printf("Erreur d'allocation mémoire\n");
-        return 1;
-    }
+	// Vérification si l'allocation a réussi.
+	if (!result)
+	{
+		printf("Erreur d'allocation mémoire\n");
+		return (1);
+	}
 
-    // Afficher les mots séparés
-    while (result[i])
-    {
-        printf("Mot %d : %s\n", i + 1, result[i]);
-        i++;
-    }
+	// Afficher les mots séparés
+	while (result[i])
+	{
+		printf("Mot %d : %s\n", i + 1, result[i]);
+		i++;
+	}
 
-    // Si tout va bien, on libère la mémoire allouée
-    i = 0;
-    while (result[i])
-    {
-        free(result[i]);  // Libérer chaque mot
-        i++;
-    }
-    free(result);  // Libérer le tableau de mots
+	// Si tout va bien, on libère la mémoire allouée
+	i = 0;
+	while (result[i])
+	{
+		free(result[i]);  // Libérer chaque mot
+		i++;
+	}
+	free(result);  // Libérer le tableau de mots
 
-    return 0;
+	return (0);
 } */
