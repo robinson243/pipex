@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 14:49:44 by romukena          #+#    #+#             */
-/*   Updated: 2025/07/24 15:23:36 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/04 15:21:24 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ mode :
 
 	Tester chaque dossier avec access(path_to_ls, X_OK)
 */
-
+/*
 int	main(void)
 {
 	const char	*cmd = "/bin/ls";
@@ -55,6 +55,7 @@ int	main(void)
 		perror("❌ Erreur");
 	return (0);
 }
+*/
 
 /*****************************FORK**********************************
 	fork() sert à créer un nouveau processus : on fait une copie du processus courant.
@@ -79,7 +80,7 @@ int	main(void)
 Chaque enfant redirige ses entrées/sorties avec dup2,
 	puis exécute une commande avec execve.
 */
-
+/*
 int	main(void)
 {
 	pid_t	pid;
@@ -97,6 +98,7 @@ int	main(void)
 			getpid(), pid);
 	return (0);
 }
+*/
 
 /************************FORK + EXECVE************************
 Créer un nouveau processus (avec fork) pour qu’il exécute une commande (avec execve) sans bloquer le processus principal.
@@ -119,7 +121,7 @@ envp est requis	Il faut passer l’environnement (ou NULL si pas besoin de varia
 args[0] = nom de la commande	Toujours mettre "ls" même si le chemin est "/bin/ls"
 Le père attend
 */
-
+/*
 int	main(int ac, char **av, char **envp)
 {
 	pid_t	pid;
@@ -150,6 +152,7 @@ int	main(int ac, char **av, char **envp)
 	}
 	return (0);
 }
+*/
 
 /*********************************DUP2**********************************************
 
@@ -185,6 +188,7 @@ dup2(pipe_fd[0], 0); // redirige stdin depuis la sortie du pipe
 dup2(outfile_fd, 1); // redirige stdout vers outfile
 */
 
+/*
 int	main(void)
 {
 	int	fd;
@@ -197,6 +201,7 @@ int	main(void)
 	printf("Ceci ira dans output.txt !\n");
 	return (0);
 }
+*/
 
 /*************************************PIPE************************************
 
@@ -240,7 +245,7 @@ dup2(fd[0], 0); // redirige stdin depuis le pipe
 
 
 */
-
+/*
 int	main(void)
 {
 	int fd[2];
@@ -254,6 +259,7 @@ int	main(void)
 
 	return (0);
 }
+*/
 
 /**********************EXECVE ***********************
 Elle sert à exécuter un programme (commande, script, binaire) à partir de son
@@ -294,7 +300,7 @@ Tu veux exécuter une commande comme ls -l :
     Si ça échoue → tu fais un perror("execve") pour afficher l'erreur
 
 */
-
+/*
 #include <unistd.h>
 #include <stdio.h>
 
@@ -306,3 +312,4 @@ int	main(int argc, char **argv, char **envp)
 		perror("❌ execve");
 	return (0);
 }
+*/
