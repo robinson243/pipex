@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 16:00:07 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/04 16:17:08 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/04 18:05:25 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	*ft_strndup(char *s, int start, int end)
 	return (dest);
 }
 
-static void	free_tab(char **tab, int k)
+void	free_tab(char **tab, int k)
 {
 	int	i;
 

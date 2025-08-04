@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:20:37 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/04 15:57:39 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/04 18:02:16 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,15 @@ char	**parse_cmd(char *cmd)
 	if (!tab)
 		return (NULL);
 	return (tab);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (fd < 0 || !s)
+		return ;
+	while (s[i])
+		write(1, &s[i++], fd);
 }

@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:55:50 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/04 16:09:14 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/04 18:04:17 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 char	**ft_split(char *s, char *charset);
 char	*ft_strjoin(char *s1, char *s2);
+void	free_tab(char **tab, int k);
 /* utils.c */
 int		ft_strlen(char *str);
 int		ft_strncmp(char *s1, char *s2, int n);
