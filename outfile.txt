@@ -1,10 +1,1 @@
-a.out
-exo.txt
-files.c
-findpath.c
-infile.txt
-outfile.txt
-pipex.h
-split.c
-strjoin.c
-utils.c
+14
