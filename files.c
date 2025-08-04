@@ -6,31 +6,11 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:43:09 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/04 15:42:48 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/04 16:06:10 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-int	open_infile(char *filename)
-{
-	int	fd;
-
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	return (fd);
-}
-
-int	open_outfile(char *filename)
-{
-	int	fd;
-
-	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0640);
-	if (fd == -1)
-		return (-1);
-	return (fd);
-}
 
 void	exit_with_error(char *msg)
 {
