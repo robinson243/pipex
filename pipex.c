@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 15:42:52 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/04 17:36:11 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:41:23 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	handle_child2(int fd[2], int pipe_fd[2],
 	child_process_2(pipe_fd[0], fd[1], av[3], envp);
 }
 
-
 void	pipex(char **av, char **envp)
 {
 	int		fd[2];
@@ -77,4 +76,3 @@ void	pipex(char **av, char **envp)
 	waitpid(pid, NULL, 0);
 	waitpid(pid2, NULL, 0);
 }
-
