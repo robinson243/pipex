@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:55:50 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/05 00:55:32 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/05 01:28:38 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		ft_strlen(char *str);
 int		ft_strncmp(char *s1, char *s2, int n);
 char	*ft_strdup(char *str);
 char	**parse_cmd(char *cmd);
+void	ft_putstr_fd(char *s, int fd);
 
 /* findpath.c*/
 char	*find_cmd_path(char **paths, char *cmd);
