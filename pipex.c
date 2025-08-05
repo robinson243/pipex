@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 15:42:52 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/04 17:41:23 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/05 16:30:47 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	pipex(char **av, char **envp)
 	fd[0] = open(av[1], O_RDONLY);
 	fd[1] = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd[0] < 0 || fd[1] < 0 || pipe(pipe_fd) < 0)
-		exit_with_error("infile");
+		exit_with_error("infile or outfile");
 	pid = fork();
 	if (pid < 0)
 		close_files(fd[0], fd[1], pipe_fd[0], pipe_fd[1]);
