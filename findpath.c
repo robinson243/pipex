@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:52:36 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/05 01:20:16 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/07 00:37:49 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	**get_paths(char **envp)
 {
 	int		i;
-	char	**tab;
 	char	*path;
+	char	**tab;
 
 	i = 0;
 	path = NULL;
@@ -40,28 +40,39 @@ char	**get_paths(char **envp)
 	return (tab);
 }
 
+char	*try_access(char *cmd)
+{
+	if (access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
+	return (NULL);
+}
+
 char	*find_cmd_path(char **paths, char *cmd)
 {
 	int		i;
 	char	*tmp;
-	char	*path_to_test;
+	char	*path;
 
+	if (!cmd || !paths)
+		return (NULL);
+	if (cmd[0] == '/' || cmd[0] == '.')
+		return (try_access(cmd));
 	i = 0;
 	while (paths[i])
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		if (!tmp)
 			return (NULL);
-		path_to_test = ft_strjoin(tmp, cmd);
+		path = ft_strjoin(tmp, cmd);
 		free(tmp);
-		if (!path_to_test)
+		if (!path)
 			return (NULL);
-		if (access(path_to_test, X_OK) == 0)
-			return (path_to_test);
-		free(path_to_test);
+		if (access(path, X_OK) == 0)
+			return (path);
+		free(path);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 /*
 #include <stdio.h>

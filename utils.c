@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:20:37 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/05 01:20:51 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/07 01:19:42 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void	ft_putstr_fd(char *s, int fd)
 	if (fd < 0 || !s)
 		return ;
 	while (s[i])
-		write(1, &s[i++], fd);
+		write(fd, &s[i++], 1);
 }

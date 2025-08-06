@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:55:50 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/05 01:28:38 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/07 01:29:01 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+
+# define STDIN_FILENO 0
+# define STDOUT_FILENO 1
 
 char	**ft_split(char *s, char *charset);
 char	*ft_strjoin(char *s1, char *s2);
@@ -47,6 +50,6 @@ void	exit_with_error(char *msg);
 /* pipex.c */
 void	close_files(int fd1, int fd2, int fd3, int fd4);
 void	close_files_without_eror(int fd1, int fd2, int fd3, int fd4);
-void	pipex(char **av, char **envp);
+int		pipex(char **av, char **envp);
 
 #endif
