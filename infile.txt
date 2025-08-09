@@ -1,5 +1,0 @@
-hello
-abc
-test
-another
-a
