@@ -6,11 +6,14 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:43:09 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/07 00:28:07 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:31:05 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+/*➜  pipex git:(main) ✗ valgrind --leak-check=full 
+--trace-children=yes --track-fds=yes ./pipex Makefile "sleep 5" "sleep 5" out*/
 
 void	exit_with_error(char *msg)
 {

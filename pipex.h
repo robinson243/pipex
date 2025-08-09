@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:55:50 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/07 01:29:01 by romukena         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:32:54 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,9 @@ void	exit_with_error(char *msg);
 void	close_files(int fd1, int fd2, int fd3, int fd4);
 void	close_files_without_eror(int fd1, int fd2, int fd3, int fd4);
 int		pipex(char **av, char **envp);
+
+/*close_files*/
+void	close_files_without_eror(int fd1, int fd2, int fd3, int fd4);
+void	close_files(int fd1, int fd2, int fd3, int fd4);
 
 #endif
