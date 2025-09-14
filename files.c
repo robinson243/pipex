@@ -6,14 +6,26 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:43:09 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/09 18:31:05 by romukena         ###   ########.fr       */
+/*   Updated: 2025/09/14 16:06:40 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-/*➜  pipex git:(main) ✗ valgrind --leak-check=full 
+/*➜  pipex git:(main) ✗ valgrind --leak-check=full
 --trace-children=yes --track-fds=yes ./pipex Makefile "sleep 5" "sleep 5" out*/
+
+static char	*print_command_error(char *cmd)
+{
+	char	*sentence;
+	char	*dest;
+
+	sentence = ": command not found\n";
+	dest = ft_strjoin(cmd, sentence);
+	if (!dest)
+		free(dest);
+	return (dest);
+}
 
 void	exit_with_error(char *msg)
 {
@@ -33,62 +45,52 @@ void	free_all_and_exit(char *pathname, char **good_path, char **args,
 	exit(exit_code);
 }
 
-void	child_process_1(int infile_fd, int pipe_write_fd, char *cmd,
-		char **envp)
+void	child_process_1(int fd[2], int pipe[2], char *cmd, char **envp)
 {
 	char	*pathname;
 	char	**good_path;
 	char	**args;
+	char	*phrase;
 
 	good_path = get_paths(envp);
 	args = parse_cmd(cmd);
-	if (!args || !args[0] || args[0][0] == '\0' || !good_path)
-	{
-		ft_putstr_fd(": command not found\n", 2);
-		free_all_and_exit(NULL, good_path, args, 127);
-	}
 	pathname = find_cmd_path(good_path, args[0]);
 	if (!pathname)
 	{
-		ft_putstr_fd(args[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
+		phrase = print_command_error(args[0]);
+		ft_putstr_fd(phrase, 2);
+		free (phrase);
+		close_files_without_eror(fd[0], fd[1], pipe[0], pipe[1]);
 		free_all_and_exit(NULL, good_path, args, 127);
 	}
-	dup2(infile_fd, STDIN_FILENO);
-	close(infile_fd);
-	dup2(pipe_write_fd, STDOUT_FILENO);
-	close(pipe_write_fd);
-	execve(pathname, args, envp);
-	perror(args[0]);
+	dup2(fd[0], STDIN_FILENO);
+	dup2(pipe[1], STDOUT_FILENO);
+	close_files_without_eror(fd[0], fd[1], pipe[0], pipe[1]);
+	(execve(pathname, args, envp), perror(args[0]));
 	free_all_and_exit(pathname, good_path, args, 127);
 }
 
-void	child_process_2(int pipe_read_fd, int outfile_fd, char *cmd,
-		char **envp)
+void	child_process_2(int fd[2], int pipe[2], char *cmd, char **envp)
 {
 	char	*pathname;
 	char	**good_path;
 	char	**args;
+	char	*phrase;
 
 	args = parse_cmd(cmd);
 	good_path = get_paths(envp);
-	if (!args || !args[0] || args[0][0] == '\0' || !good_path)
-	{
-		ft_putstr_fd(": command not found\n", 2);
-		free_all_and_exit(NULL, good_path, args, 127);
-	}
 	pathname = find_cmd_path(good_path, args[0]);
 	if (!pathname)
 	{
-		ft_putstr_fd(args[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
+		phrase = print_command_error(args[0]);
+		ft_putstr_fd(phrase, 2);
+		free(phrase);
+		close_files_without_eror(fd[0], fd[1], pipe[0], pipe[1]);
 		free_all_and_exit(NULL, good_path, args, 127);
 	}
-	dup2(pipe_read_fd, STDIN_FILENO);
-	close(pipe_read_fd);
-	dup2(outfile_fd, STDOUT_FILENO);
-	close(outfile_fd);
-	execve(pathname, args, envp);
-	perror(args[0]);
+	dup2(fd[1], STDOUT_FILENO);
+	dup2(pipe[0], STDIN_FILENO);
+	close_files_without_eror(fd[0], fd[1], pipe[0], pipe[1]);
+	(execve(pathname, args, envp), perror(args[0]));
 	free_all_and_exit(pathname, good_path, args, 127);
 }

@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:55:50 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/09 18:32:54 by romukena         ###   ########.fr       */
+/*   Updated: 2025/09/14 14:59:44 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ char	**get_paths(char **envp);
 
 /* files.c*/
 
-void	child_process_1(int infile_fd, int pipe_write_fd, char *cmd,
-			char **envp);
-void	child_process_2(int pipe_read_fd, int outfile_fd, char *cmd,
-			char **envp);
+void	child_process_1(int fd[2], int pipe[2], char *cmd, char **envp);
+void	child_process_2(int fd[2], int pipe[2], char *cmd, char **envp);
 void	exit_with_error(char *msg);
 
 /* pipex.c */
