@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 15:42:52 by romukena          #+#    #+#             */
-/*   Updated: 2025/09/20 16:22:47 by romukena         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:42:26 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ int	pipex(char **av, char **envp)
 		return (perror("fork"), 1);
 	if (pid == 0)
 		child_process_1(fd, pfd, av[2], envp);
-	waitpid(pid, &status, 0);
 	pid = fork();
 	if (pid < 0)
 		return (perror("fork"), 1);
 	if (pid == 0)
 		child_process_2(fd, pfd, av[3], envp);
 	close_files_without_eror(fd[0], fd[1], pfd[0], pfd[1]);
+	waitpid(pid, &status, 0);
 	waitpid(pid, &status, 0);
 	return (1);
 }
