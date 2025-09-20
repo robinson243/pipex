@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 15:41:53 by romukena          #+#    #+#             */
-/*   Updated: 2025/08/07 01:34:55 by romukena         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:05:24 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	}
 	status = pipex(argv, envp);
-	return (status);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (1);
 }

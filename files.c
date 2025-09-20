@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:43:09 by romukena          #+#    #+#             */
-/*   Updated: 2025/09/20 12:51:17 by romukena         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:05:05 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	child_process_1(int fd[2], int pipe[2], char *cmd, char **envp)
 	pathname = find_cmd_path(good_path, args[0]);
 	if (!pathname)
 	{
+		ft_putstr_fd(args[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
 		close_files_without_eror(fd[0], fd[1], pipe[0], pipe[1]);
 		free_all_and_exit(NULL, good_path, args, 127);
 	}
@@ -65,6 +67,8 @@ void	child_process_2(int fd[2], int pipe[2], char *cmd, char **envp)
 	pathname = find_cmd_path(good_path, args[0]);
 	if (!pathname)
 	{
+		ft_putstr_fd(args[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
 		close_files_without_eror(fd[0], fd[1], pipe[0], pipe[1]);
 		free_all_and_exit(NULL, good_path, args, 127);
 	}
