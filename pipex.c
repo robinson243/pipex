@@ -6,7 +6,7 @@
 /*   By: romukena <romukena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 15:42:52 by romukena          #+#    #+#             */
-/*   Updated: 2025/09/20 16:07:04 by romukena         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:22:47 by romukena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ int	open_multi_files(int fd[2], char **av)
 	if (fd[0] < 0)
 	{
 		perror(av[1]);
+		fd[1] = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd[1] < 0)
+		{
+			perror(av[4]);
+			return (1);
+		}
 		return (1);
 	}
 	fd[1] = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
